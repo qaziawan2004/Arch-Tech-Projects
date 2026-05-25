@@ -1,0 +1,405 @@
+body {
+    background-color: #030712;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.logo img {
+    width: 140px;
+    height: 90px;
+}
+
+nav {
+    display: flex;
+    gap: 30%;
+}
+
+nav a {
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+
+nav a:hover {
+    color: #8b5cf6;
+}
+
+.cont-12 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.img-sec img {
+    width: 280px;
+    height: 280px;
+    border: 2px solid #0f172a;
+    border-radius: 200px;
+}
+
+.para-sec h4 {
+    color: #b89e0b;
+}
+
+.para-sec  p{
+    display: flex;
+    flex-wrap: wrap;
+    word-spacing: 10px;
+    line-height: 30px;
+    width: 400px;
+}
+
+.cont-1 a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cv-butt {
+    background-color: #5c22e4;
+    width: 100px;
+    height: 40px;
+    justify-items: center;
+    border-radius: 10px;
+}
+
+.git,
+.linkedin {
+    padding: 10px;
+    background: #dfd9d92f;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.cv-butt:hover {
+    background-color: #3e12a3;
+    transform: translateY(-10px);
+}
+
+.count-11 {
+    display: flex;
+    gap: 20px;
+    margin-left: 78px;
+    margin-top: 20px;
+}
+.intro-slo{
+    display: flex ;
+    gap: 10px;
+}
+
+.intro-sl {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: lighter;
+    font-size: small;
+    margin-top: 20px;
+}
+
+.count-11 div {
+    background: #dfd9d92f;
+    width: 12vw;
+    text-align: center;
+    padding: 0 10px 0 5px;
+    border-radius: 60px;
+}
+
+.count-11 div {
+    background-color: #16171b;
+    color: #9c9ca5;
+}
+
+.ab {
+    border: 2px solid wheat;
+    border-radius: 20px;
+    width: 500px;
+    padding: 20px;
+}
+
+.ab p {
+    display: flex;
+    flex-wrap: wrap;
+    word-spacing: 10px;
+    line-height: 30px;
+}
+
+.ab h2 {
+    font-size: 36px;
+}
+
+.ab h6 {
+    color: #5c22e4;
+    font-size: 20px;
+}
+
+.par-about {
+    display: flex;
+    gap: 40px;
+    margin-left: 80px;
+}
+
+.sk {
+    color: #5c22e4;
+    font-size: large;
+}
+
+.tech {
+    border: 2px solid white;
+    width: 600px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.divpart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.divpart div {
+    background-color: #dfd9d92f;
+    padding: 10px;
+    border-radius: 60px;
+}
+.about{
+    margin-top: 10%;
+    
+}
+.tech1{
+    border: 2px solid white;
+    width: 35vw;
+    height: 45vh;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+.d-butt{
+    background-color: #fff;
+    color: #3e12a3;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+.d-butt:hover{
+    background-color: #3e12a3;
+    color: #fff;
+}
+.prop{
+    font-size: x-large;
+    font-weight: bolder;
+}
+.tech2{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 80px;
+    gap: 60px;
+}
+.education{
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+
+}
+.education h2{
+    color: #3e12a3;
+}
+.education p{
+    line-height: 40px;
+    word-spacing: 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.projects{
+    margin-top: 10%;
+    text-align: center;
+}
+
+.p1 h4{
+color: #5c22e4;
+font-weight: lighter;
+font-size: x-large;
+word-spacing: 100px;
+}
+.p1 h2{
+    font-size: 45px;
+}
+.p1  h2 span{
+    color: #3e12a3;
+}
+.p1-para{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50vw;
+    justify-self: center;
+    margin-top: -50px;
+    font-size: small;
+}
+.prj-sec{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 80vw;
+    margin: 3%;
+    justify-content: center;
+    margin-left: 10%;
+}
+.projectA{
+    border: 2px solid white;
+    padding: 5px;
+    border-radius: 20px;
+    width: 35vw;
+}
+.projectA img {
+    border-radius: 20px;
+    width: 25vw;
+    height: 30vh;
+    transition: transform 0.2s ease;
+}
+.projectA img:hover {
+  transform: scale(1.05);
+}
+.projectB{
+    width: 35vw;
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 20px;
+}
+.projectB img{
+    border-radius: 20px;
+    width: 25vw;
+    height: 30vh;
+    transition: transform 0.2s ease;
+}
+.projectB img:hover {
+  transform: scale(1.05);
+}
+.p-butt{
+    width: 15vw;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid  #3e12a3 ;
+    background-color: #030712;
+    color: #fff;
+    transition: transform 0.2s ease;
+}
+.p-butt:hover{
+    transform: scale(1.05);
+}
+.contact{
+    margin-top: 10%;
+}
+.c{
+    text-align: center;  
+}
+.c h2{
+    font-size: 45px;
+}
+.cbutt button{
+    width: 15vw;
+    margin-top: 10%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid  #3e12a3 ;
+    background-color: #030712;
+    color: #fff;
+    transition: transform 0.2s ease;
+}
+.cbutt button:hover{
+    transform: scale(1.05);
+}
+.contact span{
+    color: #3e12a3;
+}
+.ch4{
+    color: #3e12a3;
+    font-size: small;
+}
+.sem{
+    display: flex;
+}
+.sem li{
+    list-style: disc;
+}
+.semA{
+    text-align: center;
+    margin: 10%;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 80vw;
+    height: 40vh;
+    padding: 20px;
+
+}
+.semB{
+    text-align: center;
+    margin: 10%;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 80vw;
+    height: 40vh;
+    padding: 20px;
+}
+.sem1{
+    display: flex;
+    gap: 40px;
+}
+.a1{
+    text-align: center;
+    margin: 10%;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 45vw;
+    padding: 20px;
+
+}
+.a1 h2{
+color: #3e12a3;
+font-weight: bolder;    
+}
+.art{ 
+    text-decoration: none;
+    color: #fff;
+}
+.art:hover{
+    color: #3e12a3;
+}
+.a2 h2{
+    color: #3e12a3;
+    font-weight: bolder;
+}
+.a2{
+    text-align: center;
+    margin: 10%;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 35vw;
+    padding: 20px;
+
+}
+.a2 a{
+    text-decoration: none;
+    color: #fff;
+}
+.a2 a:hover{
+    color: #3e12a3;
+}
+footer{
+    margin-top: 10%
+}
+footer p{
+    text-align: center;
+}
+footer span{
+    color: #3e12a3;
+    
+}
