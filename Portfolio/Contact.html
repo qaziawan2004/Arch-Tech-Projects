@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <div class="cont-container">
+      <div class="first">
+        <div class="initial-h2">
+          <h2>Let's collaborate</h2>
+        </div>
+        <h1>Get In <span>Touch</span></h1>
+        <div class="c-para">
+          <p>Have a project in mind or just want to say hello? I'd love to <br /> hear from you.</p>
+        </div>
+      </div>
+      <div class="boxes">
+        <div class="box2">
+          <form id="contactForm">
+
+            <div class="row">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Your name" required />
+              </div>
+
+              <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Subject</label>
+              <input type="text" id="subject" placeholder="What's this about?" required />
+            </div>
+
+            <div class="input-group">
+              <label>Your Message</label>
+              <textarea id="message" placeholder="Tell me what's on your mind..." required></textarea>
+            </div>
+
+            <button type="submit" class="mess-butt">Send Message</button>
+
+            <div class="status" id="status"></div>
+
+          </form>
+        </div>
+        <div class="box1">
+          <img src="./assets/box2.png" alt="box2">
+          <div class="diff">
+            <label for="email" class="em">Email:</label>
+            <p class="ema"><i>💌 qaziawan120@gmail.com</i></p>
+            <label for="location" class="loc">Location:</label>
+            <p class="">📍 Karachi Pakistan</p>
+            <button class="git"><a href="https://github.com/qaziawan2004">GitHub</a></button>
+            <button class="linkedin"><a
+              href="https://www.linkedin.com/in/mudassir-naveed-1b1b60342/">linkedin</a></button>
+            </div>
+            </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="./script.js"></script>
+
+  </body>
+
+  </html>
 </body>
+
 </html>
