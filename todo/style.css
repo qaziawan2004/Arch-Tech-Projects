@@ -8,6 +8,9 @@ body {
     background-color: #01011d;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -20,7 +23,6 @@ body {
     justify-content: flex-start;
     align-items: stretch;
     flex-direction: column;
-
 }
 
 .container h1 {
@@ -74,12 +76,9 @@ li {
 li button {
     margin-left: 5px;
     margin-top: 5px;
-
     padding: 6px 10px;
-
     border: none;
     border-radius: 4px;
-
     cursor: pointer;
 }
 
@@ -167,6 +166,7 @@ li button {
     padding: 35px 25px;
     box-shadow: 0 8px 32px #0000004d;
     margin: 50px auto;
+    flex: 1;
 }
 
 .sign-container h1 {
@@ -232,7 +232,7 @@ li button {
 .bb {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
     margin-top: 22px;
 }
 
@@ -242,7 +242,7 @@ li button {
     border-radius: 8px;
     padding: 10px;
     align-items: center;
-    width: 50%;
+    width: auto;
     color: #ffffff;
     background-color: #299804;
     text-align: center;
@@ -254,10 +254,8 @@ li button {
 }
 
 .sign-container button {
-    width: 50%;
-
-    padding: 12px;
-
+    width: auto;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     background-color: #299804;
@@ -291,24 +289,6 @@ li button {
     transform: scale(1.02);
 }
 
-@media(max-width:500px) {
-
-    .sign-container {
-        padding: 25px 18px;
-    }
-
-    .sign-container h1 {
-        font-size: 26px;
-    }
-
-    .logout {
-        width: 30%;
-    }
-    .bb a{
-        width: 50%;
-    }
-}
-
 .Log-container {
     width: 100%;
     max-width: 450px;
@@ -320,6 +300,7 @@ li button {
     padding: 35px 25px;
     box-shadow: 0 8px 32px #0000004d;
     margin: 80px auto;
+    flex: 1;
 }
 
 .asd {
@@ -357,9 +338,9 @@ li button {
 }
 
 .input-fields button {
-    width: 50%;
+    width: auto;
     margin-top: 10px;
-    padding: 12px;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     background-color: #299804;
@@ -373,4 +354,60 @@ li button {
 .input-fields button:hover {
     background-color: #1f7402;
     transform: scale(1.02);
+}
+
+/* ========== RESPONSIVE FIXES ========== */
+
+/* Small screens */
+@media (max-width: 500px) {
+    .sign-container {
+        padding: 25px 18px;
+    }
+
+    .sign-container h1 {
+        font-size: 26px;
+    }
+
+    .logout {
+        width: 30%;
+    }
+    
+    .bb {
+        gap: 12px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .bb a {
+        width: auto;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .sign-container button,
+    .input-fields button {
+        width: auto;
+        padding: 10px 18px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+    .bb {
+        gap: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .bb a {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+    
+    .sign-container button,
+    .input-fields button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
 }
