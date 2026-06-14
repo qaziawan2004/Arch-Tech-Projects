@@ -42,7 +42,7 @@ const durationSpan = document.getElementById("duration");
 
 let currentTrack = 0;
 let isPlaying = false;
-let currentVolume = 0.7;
+let currentVolume = 1.0;
 let volumeLevels = [0, 0.2, 0.4, 0.6, 0.8, 1.0];
 let currentVolumeLevel = 5;
 
