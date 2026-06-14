@@ -55,7 +55,7 @@ function formatTime(t) {
 
 function getVolumeLevel(value) {
     for (let i = 0; i < volumeLevels.length; i++) {
-        if (value <= volumeLevels[i] + 0.05) {
+        if (value <= volumeLevels[i] + 0.10) {
             return i;
         }
     }
