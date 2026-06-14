@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Islamic Audio Player</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="player">
+
+    
+        <img src="./Assets/Images/Logo1.png" alt="Logo" class="top-logo" id="topLogo">
+  
+
+    <div class="cover-box">
+        <img id="cover" src="./Assets/Images/podcast.jpg" class="cover">
+    </div>
+
+    <h2 id="title">Akhwarun Akhwarun</h2>
+
+    <audio id="audio"></audio>
+
+    <div class="controls">
+        <button id="prev">⏮</button>
+        <button id="play">▶</button>
+        <button id="next">⏭</button>
+        <button id="repeat">🔁</button>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="time">
+        <span id="current-time">0:00</span>
+        <span id="duration">0:00</span>
+    </div>
+
+    <div class="volume-container">
+        <span>🔊</span>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+    </div>
+
+    <button class="playlist-btn" onclick="location.href='playlist.html'">
+        Playlist
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
