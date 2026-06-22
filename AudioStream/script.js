@@ -1,4 +1,4 @@
-const tracks = [
+let tracks = [
     {
         title: "Akhwarun Akhwarun",
         src: "./Audio/Audio1.mpeg",
@@ -42,9 +42,9 @@ const durationSpan = document.getElementById("duration");
 
 let currentTrack = 0;
 let isPlaying = false;
-let currentVolume = 1.0;
+let currentVolume = 0.7;
 let volumeLevels = [0, 0.2, 0.4, 0.6, 0.8, 1.0];
-let currentVolumeLevel = 5;
+let currentVolumeLevel = 4;
 
 function formatTime(t) {
     if (isNaN(t) || t === undefined) return "0:00";
@@ -55,7 +55,7 @@ function formatTime(t) {
 
 function getVolumeLevel(value) {
     for (let i = 0; i < volumeLevels.length; i++) {
-        if (value <= volumeLevels[i] + 0.10) {
+        if (value <= volumeLevels[i] + 0.05) {
             return i;
         }
     }
@@ -126,16 +126,31 @@ if (volumeSlider) {
 }
 
 function loadTrack(index, saveToStorage = true) {
+
+    if (tracks.length === 0) return;
+
     if (index >= tracks.length) {
         index = 0;
     }
+
     if (index < 0) {
         index = tracks.length - 1;
     }
+
     currentTrack = index;
-    if (audio) audio.src = tracks[index].src;
-    if (title) title.textContent = tracks[index].title;
-    if (cover) cover.src = tracks[index].cover;
+
+    if (audio) {
+        audio.src = tracks[index].src;
+    }
+
+    if (title) {
+        title.textContent = tracks[index].title;
+    }
+
+    if (cover && tracks[index].cover) {
+        cover.src = tracks[index].cover;
+    }
+
     if (saveToStorage) {
         localStorage.setItem("trackIndex", index);
         localStorage.setItem("trackChanged", "true");
@@ -143,27 +158,75 @@ function loadTrack(index, saveToStorage = true) {
 }
 
 function updateTrackDisplay() {
-    if (title) title.textContent = tracks[currentTrack].title;
-    if (cover) cover.src = tracks[currentTrack].cover;
+
+    if (!tracks[currentTrack]) return;
+
+    if (title) {
+        title.textContent = tracks[currentTrack].title;
+    }
+
+    if (cover && tracks[currentTrack].cover) {
+        cover.src = tracks[currentTrack].cover;
+    }
 }
+
+function saveTracksToLocal() {
+    const tracksToSave = tracks.map(track => ({
+        title: track.title,
+        src: track.src,
+        cover: track.cover
+    }));
+    localStorage.setItem("importedTracks", JSON.stringify(tracksToSave));
+}
+
+function loadTracksFromLocal() {
+    const savedTracks = localStorage.getItem("importedTracks");
+    if (savedTracks) {
+        const parsedTracks = JSON.parse(savedTracks);
+        if (parsedTracks && parsedTracks.length > 0) {
+           tracks = parsedTracks.filter(track => track.src);
+        }
+    }
+}
+
+loadTracksFromLocal();
+
+const isPlaylistPage =
+    window.location.pathname.includes("playlist.html");
 
 const savedTrackIndex = localStorage.getItem("trackIndex");
 const savedTrackChanged = localStorage.getItem("trackChanged");
 
-if (savedTrackIndex !== null && parseInt(savedTrackIndex) < tracks.length && parseInt(savedTrackIndex) >= 0) {
-    if (savedTrackChanged === "true") {
-        currentTrack = parseInt(savedTrackIndex);
-        loadTrack(currentTrack, false);
-        localStorage.setItem("trackChanged", "false");
-    } else {
-        currentTrack = parseInt(savedTrackIndex);
-        updateTrackDisplay();
-        if (audio) audio.src = tracks[currentTrack].src;
-    }
+if (
+    savedTrackIndex !== null &&
+    parseInt(savedTrackIndex) < tracks.length &&
+    parseInt(savedTrackIndex) >= 0
+) {
+    currentTrack = parseInt(savedTrackIndex);
 } else {
     currentTrack = 0;
-    updateTrackDisplay();
-    if (audio) audio.src = tracks[0].src;
+}
+
+if (!isPlaylistPage) {
+
+    loadTrack(currentTrack, false);
+
+    const savedPlayingState = localStorage.getItem("isPlaying");
+
+    audio.addEventListener("loadedmetadata", () => {
+
+        const savedTime =
+            parseFloat(localStorage.getItem("currentTime")) || 0;
+
+        audio.currentTime = savedTime;
+
+        if (savedPlayingState === "true") {
+            audio.play().catch(() => {});
+            playBtn.textContent = "⏸";
+            isPlaying = true;
+        }
+    });
+
 }
 
 const savedTime = localStorage.getItem("currentTime");
@@ -253,7 +316,7 @@ if (audio) {
 
             if (currentTimeSpan) currentTimeSpan.textContent = formatTime(audio.currentTime);
             if (durationSpan) durationSpan.textContent = formatTime(audio.duration);
-            
+
             localStorage.setItem("currentTime", audio.currentTime);
         }
     });
@@ -299,6 +362,96 @@ if (window.location.pathname.includes("playlist.html")) {
     const miniDuration = document.getElementById("mini-duration");
     const playlistPage = document.getElementById("playlistPage");
     const miniPlayer = document.getElementById("miniPlayer");
+    const importBtn = document.getElementById("importBtn");
+    const fileInput = document.getElementById("fileInput");
+
+    if (importBtn) {
+        importBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    if (fileInput) {
+        fileInput.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    function refreshPlaylistDisplay() {
+        const playlistContainer = document.getElementById("playlist-list");
+        if (!playlistContainer) return;
+
+        playlistContainer.innerHTML = "";
+
+        tracks.forEach((track, idx) => {
+            const li = document.createElement("li");
+            li.textContent = track.title;
+            li.setAttribute("data-src", track.src);
+            li.setAttribute("data-index", idx);
+
+            li.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.src = track.src;
+                    if (miniTitle) miniTitle.textContent = track.title;
+                    localStorage.setItem("trackIndex", idx);
+                    localStorage.setItem("trackChanged", "true");
+                    localStorage.setItem("currentTime", 0);
+                    audio.play().catch(e => console.log("Playback error:", e));
+                    if (miniPlayBtn) miniPlayBtn.textContent = "⏸";
+                    localStorage.setItem("isPlaying", "true");
+                }
+            });
+
+            playlistContainer.appendChild(li);
+        });
+    }
+    refreshPlaylistDisplay();
+
+    if (importBtn && fileInput) {
+        importBtn.onclick = (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            fileInput.click();
+        };
+
+        fileInput.onchange = (e) => {
+            e.stopPropagation();
+            const files = Array.from(e.target.files);
+
+            files.forEach((file) => {
+
+                const fileName = file.name.replace(/\.[^/.]+$/, "");
+
+                const reader = new FileReader();
+
+                reader.onload = function () {
+
+                    tracks.push({
+                        title: fileName,
+                        src: reader.result,
+                        cover: "./Assets/Images/podcast.jpg",
+                        imported: true
+                    });
+
+                    saveTracksToLocal();
+                    refreshPlaylistDisplay();
+                };
+
+                reader.readAsDataURL(file);
+
+            });
+
+            saveTracksToLocal();
+            refreshPlaylistDisplay();
+
+            fileInput.value = "";
+
+            alert(`${files.length} audio file(s) imported successfully!`);
+        };
+    }
 
     let playlistTracks = [];
 
@@ -317,6 +470,8 @@ if (window.location.pathname.includes("playlist.html")) {
                 trackSrc = "./Audio/Audio4.mpeg";
             } else if (trackTitle === "Alnazara Alakhira") {
                 trackSrc = "./Audio/Audio6.mpeg";
+            } else {
+                trackSrc = item.dataset.src;
             }
 
             playlistTracks.push({
@@ -345,28 +500,6 @@ if (window.location.pathname.includes("playlist.html")) {
         });
     }
 
-    const savedPlaylistIndex = localStorage.getItem("trackIndex");
-    const savedPlaylistTime = localStorage.getItem("currentTime");
-    const savedPlaylistPlaying = localStorage.getItem("isPlaying");
-
-    if (savedPlaylistIndex !== null && parseInt(savedPlaylistIndex) < playlistTracks.length && parseInt(savedPlaylistIndex) >= 0) {
-        const savedIdx = parseInt(savedPlaylistIndex);
-        currentTrack = savedIdx;
-        if (audio) {
-            audio.src = playlistTracks[savedIdx].src;
-            if (miniTitle) miniTitle.textContent = playlistTracks[savedIdx].title;
-        }
-        if (savedPlaylistTime && parseFloat(savedPlaylistTime) > 0 && audio) {
-            audio.currentTime = parseFloat(savedPlaylistTime);
-        }
-        if (savedPlaylistPlaying === 'true') {
-            if (audio) audio.play();
-            if (miniPlayBtn) miniPlayBtn.textContent = "⏸";
-        } else {
-            if (miniPlayBtn) miniPlayBtn.textContent = "▶";
-        }
-    }
-
     if (miniPlayBtn) {
         miniPlayBtn.onclick = (e) => {
             e.stopPropagation();
@@ -384,17 +517,17 @@ if (window.location.pathname.includes("playlist.html")) {
         };
     }
 
-    if (miniNextBtn && playlistTracks.length > 0) {
+    if (miniNextBtn) {
         miniNextBtn.onclick = (e) => {
             e.stopPropagation();
             let currentIdx = parseInt(localStorage.getItem("trackIndex")) || 0;
-            let nextIdx = (currentIdx + 1) % playlistTracks.length;
+            let nextIdx = (currentIdx + 1) % tracks.length;
             if (audio) {
                 audio.pause();
                 audio.currentTime = 0;
-                audio.src = playlistTracks[nextIdx].src;
+                audio.src = tracks[nextIdx].src;
                 currentTrack = nextIdx;
-                if (miniTitle) miniTitle.textContent = playlistTracks[nextIdx].title;
+                if (miniTitle) miniTitle.textContent = tracks[nextIdx].title;
                 localStorage.setItem("trackIndex", nextIdx);
                 localStorage.setItem("trackChanged", "true");
                 localStorage.setItem("currentTime", 0);
@@ -405,17 +538,17 @@ if (window.location.pathname.includes("playlist.html")) {
         };
     }
 
-    if (miniPrevBtn && playlistTracks.length > 0) {
+    if (miniPrevBtn) {
         miniPrevBtn.onclick = (e) => {
             e.stopPropagation();
             let currentIdx = parseInt(localStorage.getItem("trackIndex")) || 0;
-            let prevIdx = (currentIdx - 1 + playlistTracks.length) % playlistTracks.length;
+            let prevIdx = (currentIdx - 1 + tracks.length) % tracks.length;
             if (audio) {
                 audio.pause();
                 audio.currentTime = 0;
-                audio.src = playlistTracks[prevIdx].src;
+                audio.src = tracks[prevIdx].src;
                 currentTrack = prevIdx;
-                if (miniTitle) miniTitle.textContent = playlistTracks[prevIdx].title;
+                if (miniTitle) miniTitle.textContent = tracks[prevIdx].title;
                 localStorage.setItem("trackIndex", prevIdx);
                 localStorage.setItem("trackChanged", "true");
                 localStorage.setItem("currentTime", 0);
@@ -447,17 +580,26 @@ if (window.location.pathname.includes("playlist.html")) {
             let target = e.target;
             let isControlElement = false;
 
+            if (target.id === 'importBtn' || target.closest('#importBtn')) {
+                return;
+            }
+
             while (target && target !== playlistPage) {
-                if (target.tagName === 'LI' ||
+
+                if (
+                    target.tagName === 'LI' ||
                     target.id === 'playBtn' ||
                     target.id === 'prevBtn' ||
-                    target.id === 'nextBtn') {
+                    target.id === 'nextBtn' ||
+                    target.id === 'importBtn' ||
+                    target.id === 'fileInput'
+                ) {
                     isControlElement = true;
                     break;
                 }
+
                 target = target.parentNode;
             }
-
             if (!isControlElement) {
                 if (audio) {
                     localStorage.setItem("trackIndex", currentTrack);
@@ -501,4 +643,5 @@ window.addEventListener("beforeunload", () => {
         localStorage.setItem("isPlaying", !audio.paused);
         localStorage.setItem("volume", audio.volume);
     }
+    saveTracksToLocal();
 });

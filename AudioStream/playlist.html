@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Playlist</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Playlist</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="playlist-page" id="playlistPage">
+    <div class="playlist-page" id="playlistPage">
 
+        <h2 class="page-title">Playlist</h2>
 
-        <img src="./Assets/Images/Logo1.png" alt="Logo" class="top-logo" id="topLogo">
-    
-    <h2 class="page-title">Playlist</h2>
+        <button id="importBtn">Import Audio</button>
 
-    <ul id="playlist-list">
-        <li data-src="./Audio/Audio1.mpeg" data-index="0">Akhwarun Akhwarun</li>
-        <li data-src="./Audio/Audio2.mpeg" data-index="1">Muhammad Nabeena</li>
-        <li data-src="./Audio/Audio3.mpeg" data-index="2">Ma Lajpalan</li>
-        <li data-src="./Audio/Audio4.mpeg" data-index="3">Kamli Valay Muhammad</li>
-        <li data-src="./Audio/Audio6.mpeg" data-index="4">Alnazara Alakhira</li>
-    </ul>
+        <input type="file" id="fileInput" accept=".mp3,.mpeg,audio/*" multiple hidden>
 
-</div>
+        <ul id="playlist-list">
+            <li data-src="./Audio/Audio1.mpeg" data-index="0">Akhwarun Akhwarun</li>
+            <li data-src="./Audio/Audio2.mpeg" data-index="1">Muhammad Nabeena</li>
+            <li data-src="./Audio/Audio3.mpeg" data-index="2">Ma Lajpalan</li>
+            <li data-src="./Audio/Audio4.mpeg" data-index="3">Kamli Valay Muhammad</li>
+            <li data-src="./Audio/Audio6.mpeg" data-index="4">Alnazara Alakhira</li>
+        </ul>
 
-<div class="mini-player" id="miniPlayer">
-
-    <div class="mini-title" id="mini-title">
-        No Track Selected
     </div>
 
-    <div class="mini-progress">
-        <div class="mini-progress-fill" id="mini-progress"></div>
+    <div class="mini-player" id="miniPlayer">
+
+        <div class="mini-title" id="mini-title">
+            No Track Selected
+        </div>
+
+        <div class="mini-progress">
+            <div class="mini-progress-fill" id="mini-progress"></div>
+        </div>
+
+        <div class="mini-time">
+            <span id="mini-current-time">0:00</span>
+            <span id="mini-duration">0:00</span>
+        </div>
+
+        <div class="mini-controls">
+            <button id="prevBtn">⏮</button>
+            <button id="playBtn">▶</button>
+            <button id="nextBtn">⏭</button>
+        </div>
+
     </div>
 
-    <div class="mini-time">
-        <span id="mini-current-time">0:00</span>
-        <span id="mini-duration">0:00</span>
-    </div>
+    <audio id="audio"></audio>
 
-    <div class="mini-controls">
-        <button id="prevBtn">⏮</button>
-        <button id="playBtn">▶</button>
-        <button id="nextBtn">⏭</button>
-    </div>
-
-</div>
-
-<audio id="audio"></audio>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
