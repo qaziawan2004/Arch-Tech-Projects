@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
-import NotificationItem from '../components/notifications/NotificationItem';
+import Navbar from '../Components/layout/Navbar';
+import Sidebar from '../Components/layout/Sidebar';
+import Button from '../Components/ui/Button';
+import NotificationItem from '../Components/notifications/NotificationItem';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([

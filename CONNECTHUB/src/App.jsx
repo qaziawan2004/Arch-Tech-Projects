@@ -47,6 +47,12 @@ function App() {
                 <FriendRequests />
               </ProtectedRoute>
             } />
+            {/* Add /friends route that points to FriendRequests */}
+            <Route path="/friends" element={
+              <ProtectedRoute>
+                <FriendRequests />
+              </ProtectedRoute>
+            } />
             <Route path="/notifications" element={
               <ProtectedRoute>
                 <Notifications />
