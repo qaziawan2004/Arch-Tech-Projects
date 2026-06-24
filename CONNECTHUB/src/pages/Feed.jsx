@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
-import CreatePost from '../components/posts/CreatePost';
-import PostCard from '../components/posts/PostCard';
+import Navbar from '../Components/layout/Navbar';
+import Sidebar from '../Components/layout/Sidebar';
+import CreatePost from '../Components/posts/CreatePost';
+import PostCard from '../Components/posts/PostCard';
 import { postService } from '../services/postService';
 
 const Feed = () => {

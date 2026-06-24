@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
-import Avatar from '../components/ui/Avatar';
-import Button from '../components/ui/Button';
+import Navbar from '../Components/layout/Navbar';
+import Sidebar from '../Components/layout/Sidebar';
+import Avatar from '../Components/ui/Avatar';
+import Button from '../Components/ui/Button';
 
 const FriendRequests = () => {
   const [requests, setRequests] = useState([

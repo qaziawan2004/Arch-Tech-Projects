@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
-import Avatar from '../components/ui/Avatar';
-import Button from '../components/ui/Button';
-import PostCard from '../components/posts/PostCard';
+import Navbar from '../Components/layout/Navbar';
+import Sidebar from '../Components/layout/Sidebar';
+import Avatar from '../Components/ui/Avatar';
+import Button from '../Components/ui/Button';
+import PostCard from '../Components/posts/PostCard';
 
 const UserProfile = () => {
   const { userId } = useParams();
