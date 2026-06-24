@@ -1,48 +1,48 @@
 @import "tailwindcss";
 
-@theme {
-  /* You can add custom theme variables here if needed */
-}
-
 @layer base {
   body {
-    background-color: var(--color-gray-50);
-    color: var(--color-gray-900);
+    background-color: #f3f4f6;
+    color: #111827;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
 @layer components {
   .btn-primary {
-    background-color: var(--color-blue-600);
+    background-color: #2563eb;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     transition: background-color 0.2s;
   }
   .btn-primary:hover {
-    background-color: var(--color-blue-700);
+    background-color: #1d4ed8;
   }
   
   .btn-danger {
-    background-color: var(--color-red-600);
+    background-color: #dc2626;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     transition: background-color 0.2s;
   }
   .btn-danger:hover {
-    background-color: var(--color-red-700);
+    background-color: #b91c1c;
   }
   
   .input-field {
     width: 100%;
-    border: 1px solid var(--color-gray-300);
+    border: 1px solid #d1d5db;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
+    background-color: white;
+    transition: border-color 0.2s;
   }
   .input-field:focus {
     outline: none;
-    ring: 2px solid var(--color-blue-500);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
   }
   
   .card {

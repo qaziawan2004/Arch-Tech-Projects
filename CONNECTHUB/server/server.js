@@ -5,54 +5,30 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
-
-// ===== USE ENVIRONMENT VARIABLES =====
-const MONGODB_URI = process.env.MONGODB_URI;
-const JWT_SECRET = process.env.JWT_SECRET;
 const PORT = process.env.PORT || 5000;
 
-// Debug: Check if .env loaded
-console.log('🔍 Environment check:');
-console.log('MONGODB_URI:', MONGODB_URI ? '✅ Set' : '❌ Not set');
-console.log('PORT:', PORT || '❌ Not set');
-console.log('JWT_SECRET:', JWT_SECRET ? '✅ Set' : '❌ Not set');
-
-// ===== Middleware =====
+// Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://your-frontend-url.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
 
-// ===== DATABASE CONNECTION =====
-console.log('🔄 Attempting to connect to MongoDB...');
-
-if (!MONGODB_URI) {
-  console.error('❌ ERROR: MONGODB_URI is not defined in .env file!');
-  process.exit(1);
-}
+// MongoDB Connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/connecthub';
 
 mongoose.connect(MONGODB_URI)
-.then(() => {
-  console.log('✅ MongoDB connected successfully');
-})
-.catch(err => {
-  console.error('❌ MongoDB connection error:', err.message);
-});
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch(err => console.error('❌ MongoDB connection error:', err.message));
 
-mongoose.connection.on('error', (err) => {
-  console.log('❌ Mongoose connection error:', err.message);
-});
-
-// ===== USER MODEL (NO pre('save') HOOK) =====
+// ===== USER SCHEMA =====
 const UserSchema = new mongoose.Schema({
-  name: { type: String, required: [true, 'Name is required'] },
-  email: { type: String, required: [true, 'Email is required'], unique: true },
-  password: { type: String, required: [true, 'Password is required'], select: false },
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true, select: false },
   profilePicture: { type: String, default: '' },
   bio: { type: String, default: '' },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
@@ -60,34 +36,35 @@ const UserSchema = new mongoose.Schema({
   isPrivate: { type: Boolean, default: false },
 }, { timestamps: true });
 
-// ===== STATIC METHOD: Hash password =====
-UserSchema.statics.hashPassword = async function(password) {
+// Hash password before saving
+UserSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
-};
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-// ===== INSTANCE METHOD: Compare password =====
-UserSchema.methods.comparePasswordAsync = async function(candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+// Compare password method
+UserSchema.methods.comparePassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model('User', UserSchema);
 
-// ===== JWT HELPERS =====
+// ===== JWT HELPER =====
 const generateToken = (id) => {
-  return jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'ConnectHub_SecureKey_2026!@#$%^&*', { expiresIn: '7d' });
 };
 
 // ===== AUTH ROUTES =====
 
-// Register - Hash password manually
+// Register
 app.post('/api/auth/register', async (req, res) => {
   try {
     console.log('📝 Registration request received:', req.body.email);
     
     const { name, email, password } = req.body;
     
-    // Validate input
     if (!name || !email || !password) {
       return res.status(400).json({ 
         success: false, 
@@ -95,7 +72,6 @@ app.post('/api/auth/register', async (req, res) => {
       });
     }
 
-    // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ 
@@ -104,16 +80,7 @@ app.post('/api/auth/register', async (req, res) => {
       });
     }
 
-    // Hash the password manually
-    const hashedPassword = await User.hashPassword(password);
-    
-    // Create user with hashed password
-    const user = new User({ 
-      name, 
-      email, 
-      password: hashedPassword 
-    });
-    
+    const user = new User({ name, email, password });
     await user.save();
     console.log('✅ User created:', user._id);
     
@@ -121,7 +88,6 @@ app.post('/api/auth/register', async (req, res) => {
     
     res.status(201).json({
       success: true,
-      message: 'User registered successfully',
       data: {
         token,
         user: {
@@ -135,11 +101,7 @@ app.post('/api/auth/register', async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Registration error:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Server error', 
-      error: error.message 
-    });
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 });
 
@@ -166,9 +128,7 @@ app.post('/api/auth/login', async (req, res) => {
       });
     }
 
-    const isMatch = await user.comparePasswordAsync(password);
-    console.log('🔍 Password match:', isMatch);
-    
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       console.log('❌ Password mismatch for:', email);
       return res.status(401).json({ 
@@ -182,7 +142,6 @@ app.post('/api/auth/login', async (req, res) => {
     
     res.status(200).json({
       success: true,
-      message: 'Login successful',
       data: {
         token,
         user: {
@@ -196,11 +155,7 @@ app.post('/api/auth/login', async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Login error:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Server error', 
-      error: error.message 
-    });
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 });
 
@@ -212,7 +167,7 @@ app.get('/api/auth/me', async (req, res) => {
       return res.status(401).json({ success: false, message: 'No token provided' });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'ConnectHub_SecureKey_2026!@#$%^&*');
     const user = await User.findById(decoded.id);
     
     if (!user) {
@@ -234,20 +189,6 @@ app.get('/api/auth/me', async (req, res) => {
   } catch (error) {
     console.error('❌ Auth error:', error);
     res.status(401).json({ success: false, message: 'Invalid token' });
-  }
-});
-
-// ===== DEBUG: Check users =====
-app.get('/api/debug/users', async (req, res) => {
-  try {
-    const users = await User.find().select('-password');
-    res.json({
-      success: true,
-      count: users.length,
-      users: users
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 });
 
