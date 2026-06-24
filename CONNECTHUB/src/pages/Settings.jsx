@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
-import InputField from '../components/ui/InputField';
-import Button from '../components/ui/Button';
+import Navbar from '../Components/layout/Navbar';
+import Sidebar from '../Components/layout/Sidebar';
+import InputField from '../Components/ui/InputField';
+import Button from '../Components/ui/Button';
 
 const Settings = () => {
   const [settings, setSettings] = useState({
