@@ -1,59 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Playlist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="playlist-page" id="playlistPage">
+    <div class="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-headphones"></i>
+                <span>Audio<span>Pro</span></span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-music"></i> Player</a>
+                <a href="playlist.html" class="active"><i class="fas fa-list"></i> Library</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </aside>
 
-        <h2 class="page-title">Playlist</h2>
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Library Header -->
+            <div class="library-header">
+                <h1><i class="fas fa-headphones"></i> Audio Library</h1>
+                <div class="library-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search tracks...">
+                    </div>
+                    <button id="importBtn" class="import-btn">
+                        <i class="fas fa-plus"></i> Import
+                    </button>
+                    <input type="file" id="fileInput" accept=".mp3,.mpeg,audio/*" multiple hidden>
+                </div>
+            </div>
 
-        <button id="importBtn">Import Audio</button>
+            <!-- Filters -->
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nasheed">Nasheed</button>
+                <button class="filter-btn" data-filter="imported">Imported</button>
+            </div>
 
-        <input type="file" id="fileInput" accept=".mp3,.mpeg,audio/*" multiple hidden>
+            <!-- Track List -->
+            <div class="track-list-container">
+                <div class="track-stats">
+                    <span id="totalTracks">0 tracks</span>
+                </div>
+                <ul id="playlistList" class="track-list"></ul>
+                
+                <div class="empty-state" id="emptyState" style="display:none;">
+                    <i class="fas fa-music"></i>
+                    <h3>No tracks found</h3>
+                    <p>Import audio files to build your library</p>
+                </div>
+            </div>
 
-        <ul id="playlist-list">
-            <li data-src="./Audio/Audio1.mpeg" data-index="0">Akhwarun Akhwarun</li>
-            <li data-src="./Audio/Audio2.mpeg" data-index="1">Muhammad Nabeena</li>
-            <li data-src="./Audio/Audio3.mpeg" data-index="2">Ma Lajpalan</li>
-            <li data-src="./Audio/Audio4.mpeg" data-index="3">Kamli Valay Muhammad</li>
-            <li data-src="./Audio/Audio6.mpeg" data-index="4">Alnazara Alakhira</li>
-        </ul>
-
+        </main>
     </div>
 
+    <!-- Mini Player (floating) -->
     <div class="mini-player" id="miniPlayer">
-
-        <div class="mini-title" id="mini-title">
-            No Track Selected
+        <div class="mini-info">
+            <img id="miniCover" src="./Assets/Images/podcast.jpg" alt="Cover" class="mini-cover">
+            <div>
+                <div class="mini-title" id="miniTitle">No Track Selected</div>
+                <div class="mini-artist" id="miniArtist">-</div>
+            </div>
         </div>
-
-        <div class="mini-progress">
-            <div class="mini-progress-fill" id="mini-progress"></div>
-        </div>
-
-        <div class="mini-time">
-            <span id="mini-current-time">0:00</span>
-            <span id="mini-duration">0:00</span>
-        </div>
-
         <div class="mini-controls">
-            <button id="prevBtn">⏮</button>
-            <button id="playBtn">▶</button>
-            <button id="nextBtn">⏭</button>
+            <button id="miniPrev"><i class="fas fa-step-backward"></i></button>
+            <button id="miniPlay" class="mini-play-btn"><i class="fas fa-play"></i></button>
+            <button id="miniNext"><i class="fas fa-step-forward"></i></button>
         </div>
-
+        <div class="mini-progress-container">
+            <div class="mini-progress-track">
+                <div class="mini-progress-fill" id="miniProgress"></div>
+            </div>
+        </div>
     </div>
 
     <audio id="audio"></audio>
 
+    <div id="toast" style="display:none; position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#1a221a; color:white; padding:12px 24px; border-radius:12px; border:1px solid #00c853; z-index:9999; font-family:sans-serif; box-shadow:0 8px 32px rgba(0,0,0,0.5);"></div>
+
     <script src="script.js"></script>
 </body>
-
 </html>

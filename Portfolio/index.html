@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
     <div class="container">
@@ -16,22 +17,13 @@
                 <span class="logo">
                     <img src="./assets/logo.png" alt="logo">
                 </span>
-                <ul>
-                    <li>
-                        <a href="#home">Home</a>
-                    </li>
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#skills">Skills</a>
-                    </li>
-                    <li>
-                        <a href="#projects">Projects</a>
-                    </li>
-                    <li>
-                        <a href="#blogs">Blogs</a>
-                    </li>
+
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blogs">Blogs</a></li>
                     <li>
                         <button class="cv-butt">
                             <a href="./Contact.html">Contact</a>
@@ -39,12 +31,26 @@
                     </li>
                 </ul>
 
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+
+                <div class="mobile-nav" id="mobileNav">
+                    <a href="#home"><span class="emoji">🏠</span> Home</a>
+                    <a href="#about"><span class="emoji">👤</span> About</a>
+                    <a href="#skills"><span class="emoji">⚙️</span> Skills</a>
+                    <a href="#projects"><span class="emoji">📁</span> Projects</a>
+                    <a href="#blogs"><span class="emoji">📝</span> Blogs</a>
+                    <a href="./Contact.html"><span class="emoji">✉️</span> Contact</a>
+                </div>
             </nav>
         </header>
         <main>
 
 
-            <section class="intro">
+            <section class="intro" id="home">
                 <div class="cont-1">
                     <div class="cont-12">
                         <div class="para-sec">
@@ -65,9 +71,10 @@
                             <span class="intro-sl">
                                 <button class="cv-butt"><a href="./assets/Mudass ir Awan Cv.pdf" download
                                         class="cv-butt1">Download CV </a></button>
-                                        <button class="cv-butt"><a href="./Contact.html">Hire Me!</a></button>
+                                <button class="cv-butt"><a href="./Contact.html">Hire Me!</a></button>
                                 <button class="git"><a href="https://github.com/qaziawan2004">GitHub</a></button>
-                                <button class="linkedin"><a href="https://www.linkedin.com/in/mudassir-naveed-1b1b60342/">linkedin</a></button>
+                                <button class="linkedin"><a
+                                        href="https://www.linkedin.com/in/mudassir-naveed-1b1b60342/">linkedin</a></button>
                             </span>
                         </div>
                         <div class="img-sec">
@@ -79,7 +86,7 @@
                             <p>🟢 Open to work</p>
                         </div>
                         <div>
-                            <p>⚡   Fast learner</p>
+                            <p>⚡ Fast learner</p>
                         </div>
                         <div>
                             <p>🌐 Remote friendly</p>
@@ -94,38 +101,38 @@
             </section>
 
 
-            <section class="about">
+            <section class="about" id="about">
                 <div class="par-about">
                     <div class="ab">
                         <h6>WHO I AM</h6>
-                            <h2>About Me</h2>
-                            <p>I am a frontend developer with skills in HTML, CSS, JavaScript, Bootstrap, Tailwind CSS,
-                                TypeScript, and React.js. I enjoy building responsive, modern, and
-                                user-friendly web interfaces while continuously
-                                improving my development skills. Currently, I am expanding my knowledge in
-                                MERN Stack development to become a
-                                full-stack developer. I am passionate about learning new technologies,
-                                creating real-world projects, and developing clean, scalable web applications.
-                            </p>
+                        <h2>About Me</h2>
+                        <p>I am a frontend developer with skills in HTML, CSS, JavaScript, Bootstrap, Tailwind CSS,
+                            TypeScript, and React.js. I enjoy building responsive, modern, and
+                            user-friendly web interfaces while continuously
+                            improving my development skills. Currently, I am expanding my knowledge in
+                            MERN Stack development to become a
+                            full-stack developer. I am passionate about learning new technologies,
+                            creating real-world projects, and developing clean, scalable web applications.
+                        </p>
                     </div>
                     <div class="tech">
                         <h4 class="sk">Always Growing</h4>
-                            <h2>My Tech Stack</h2>
-                                <p>Tools i reach for everyday</p>
-                                <div class="divpart">
-                                    <div>HTML</div>
-                                    <div>CSS</div>
-                                    <div>JavaScript</div>
-                                    <div>Bootstrap</div>
-                                    <div>Tailwind CSS</div>
-                                    <div>TypeScript</div>
-                                    <div>React.js</div>
-                                    <div>Git & GitHub</div>
-                                    <div>Responsive Design</div>
-                                    <div>API Integration</div>
-                                    <div>Firebase</div>
-                                    <div>MERN Stack (Learning)</div>
-                                </div>
+                        <h2>My Tech Stack</h2>
+                        <p>Tools i reach for everyday</p>
+                        <div class="divpart">
+                            <div>HTML</div>
+                            <div>CSS</div>
+                            <div>JavaScript</div>
+                            <div>Bootstrap</div>
+                            <div>Tailwind CSS</div>
+                            <div>TypeScript</div>
+                            <div>React.js</div>
+                            <div>Git & GitHub</div>
+                            <div>Responsive Design</div>
+                            <div>API Integration</div>
+                            <div>Firebase</div>
+                            <div>MERN Stack (Learning)</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tech2">
@@ -147,118 +154,129 @@
                 </div>
             </section>
 
-            <section class="projects">
+            <section class="projects" id="projects">
                 <div class="p1">
                     <h4>—Projects—</h4>
                     <h2>A small selection of <span>recent Projects</span></h2>
                     <div class="p1-para">
 
-                        <p>Crafting responsive and modern web experiences with React.js, 
+                        <p>Crafting responsive and modern web experiences with React.js,
                             Tailwind CSS, and JavaScript while evolving into a full-stack developer.
                         </p>
-                        </div> 
                     </div>
-                    <div class="prj-sec">
-                        <div class="projectA">
-                            <span class="span">
-                                <h4><b>TodoFlow</b></h4>
-                                <p>TodoFlow is a responsive task management web application built using HTML, <br />
-                                CSS, and JavaScript that helps users easily create, organize,  <br />
+                </div>
+                <div class="prj-sec">
+                    <div class="projectA">
+                        <span class="span">
+                            <h4><b>TodoFlow</b></h4>
+                            <p>TodoFlow is a responsive task management web application built using HTML, <br />
+                                CSS, and JavaScript that helps users easily create, organize, <br />
                                 and track their daily tasks in a simple and efficient way.</p>
-                            </span>
-                            <a href="https://arch-tech-projects.vercel.app/">
+                        </span>
+                        <a href="https://arch-tech-projects.vercel.app/">
                             <img src="./assets/pro1.png" alt="pro1">
-                            </a>
-                        </div>
-                        <div class="projectB">
-                            <span class="span">
-                                <h4><b>AutoDrive</b></h4>
-                                <p>AutoDrive is a responsive auto dealership web application built using  <br />
-                                HTML, CSS, and JavaScript that allows users to browse a wide range of vehicles,<br /> 
+                        </a>
+                    </div>
+                    <div class="projectB">
+                        <span class="span">
+                            <h4><b>AutoDrive</b></h4>
+                            <p>AutoDrive is a responsive auto dealership web application built using <br />
+                                HTML, CSS, and JavaScript that allows users to browse a wide range of vehicles,<br />
                                 view detailed car listings, and explore prices and specifications in a clean and <br />
                                 user-friendly interface.It provides a smooth shopping experience for finding <br />
                                 the perfect car with ease and efficiency.
                             </p>
-                            </span>
-                            <a href="https://react-assignment-wvv8.vercel.app/">
-                                <img src="./assets/pro2.png" alt="pro2">
-                            </a>
-                        </div>
+                        </span>
+                        <a href="https://react-assignment-wvv8.vercel.app/">
+                            <img src="./assets/pro2.png" alt="pro2">
+                        </a>
                     </div>
-                    <button class="p-butt" onclick="window.location.href='./projects.html'">More Projects</button>
+                </div>
+                <button class="p-butt" onclick="window.location.href='./projects.html'">More Projects</button>
             </section>
 
-            <section class="se">
+            <section class="se" id="blogs">
                 <div class="sem">
                     <div class="semA">
                         <h2>💼 Experience</h2>
                         <h5>Frontend Developer (Learning Stage) <br />
-                        SMIT Karachi - Web Development Program</h5>
+                            SMIT Karachi - Web Development Program</h5>
                         <ul>
-                        <li>
-                            Learning modern web development with focus on React.js and MERN stack
-                        </li>
-                        <li>
-                            Built responsive UI using HTML, CSS, JavaScript, Tailwind CSS, and Bootstrap
-                        </li>
-                        <li>Practicing component-based development and reusable UI design</li>
-                        <li>Working on real-world style projects to improve frontend skills</li>
+                            <li>
+                                Learning modern web development with focus on React.js and MERN stack
+                            </li>
+                            <li>
+                                Built responsive UI using HTML, CSS, JavaScript, Tailwind CSS, and Bootstrap
+                            </li>
+                            <li>Practicing component-based development and reusable UI design</li>
+                            <li>Working on real-world style projects to improve frontend skills</li>
                         </ul>
                     </div>
 
-                    <div class="semB" >
+                    <div class="semB">
                         <h2>Reviews</h2>
                         <p>⭐⭐⭐⭐⭐</p>
-                    <ul>
-                        <li>
-                            SMIT Instructor → "Shows strong understanding of frontend development and UI design." 
-                        </li>
-                        <li>
-                            Friend / Tester → "Your Todo app is clean, fast, and user-friendly." 
-                        </li>
-                        <li>
-                            Peer Developer → "Great improvement in responsive design."
-                        </li>
-                    </ul>
+                        <ul>
+                            <li>
+                                SMIT Instructor → "Shows strong understanding of frontend development and UI design."
+                            </li>
+                            <li>
+                                Friend / Tester → "Your Todo app is clean, fast, and user-friendly."
+                            </li>
+                            <li>
+                                Peer Developer → "Great improvement in responsive design."
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="sem1">
                     <div class="a1">
                         <h2>Blogs</h2>
                         <h4>🚀 Journey of a Beginner Coder</h4>
-                        <p>Sharing my experience as a beginner frontend developer — from learning HTML, CSS, and JavaScript to <br />
-                        building real projects and starting my journey toward MERN stack development.</p>
-                        <a class="art" href="https://medium.com/@qaziawan120/journey-of-a-beginner-973080e4b220">Read Article</a>
+                        <p>Sharing my experience as a beginner frontend developer — from learning HTML, CSS, and
+                            JavaScript to <br />
+                            building real projects and starting my journey toward MERN stack development.</p>
+                        <a class="art" href="https://medium.com/@qaziawan120/journey-of-a-beginner-973080e4b220">Read
+                            Article</a>
                     </div>
                     <div class="a2">
                         <h2>Achievements</h2>
                         <p>
-                        🏆 Earned multiple certifications from Cisco Networking Academy, <br />
+                            🏆 Earned multiple certifications from Cisco Networking Academy, <br />
                             strengthening my knowledge in technology and web development fundamentals.
-                            </p>
-                            <a href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/HTML_Essentials_certificate_qaziawan120-gmail-com_5c4235ca-945c-4b02-8ac4-1564639855df.pdf">For HTML</a> <br />
-                            <a href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/CSS_Essentials_certificate_qaziawan120-gmail-com_272c6309-0c19-499b-917c-5aeb38150cae.pdf">For CSS</a> <br />
-                            <a href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/JavaScript_Essentials_1_certificate_qaziawan120-gmail-com_b198d3e2-9154-409b-97cc-019bfae449d1.pdf">For JS</a>
-                        </div>
+                        </p>
+                        <a
+                            href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/HTML_Essentials_certificate_qaziawan120-gmail-com_5c4235ca-945c-4b02-8ac4-1564639855df.pdf">For
+                            HTML</a> <br />
+                        <a
+                            href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/CSS_Essentials_certificate_qaziawan120-gmail-com_272c6309-0c19-499b-917c-5aeb38150cae.pdf">For
+                            CSS</a> <br />
+                        <a
+                            href="https://github.com/qaziawan2004/Arch-Tech-Projects/blob/main/certificates/JavaScript_Essentials_1_certificate_qaziawan120-gmail-com_b198d3e2-9154-409b-97cc-019bfae449d1.pdf">For
+                            JS</a>
+                    </div>
                 </div>
             </section>
 
-            <section class="contact">
+            <section class="contact" id="contact">
                 <div class="c">
                     <h4 class="ch4">—OPEN TO OPPORTUNITIES—</h4>
                     <h2>Let's Build Something <br />
                         <span>Amazing</span> Together
                     </h2>
                     <p>I am always excited to discuss new opportunities, collaborate on <br />
-                    innovative projects, or chat about emerging technologies.
+                        innovative projects, or chat about emerging technologies.
                     </p>
-                    <span class="cbutt"><button onclick="window.location.href='./Contact.html'">Let's get in touch  →</button></span>
+                    <span class="cbutt"><button onclick="window.location.href='./Contact.html'">Let's get in touch
+                            →</button></span>
                 </div>
             </section>
         </main>
         <footer>
-            <p>© 2026 <span>Mudassir Awan.</span>  All rights reserved. Frontend Developer | MERN Stack Learner | Karachi, Pakistan.</p>
+            <p>© 2026 <span>Mudassir Awan.</span> All rights reserved. Frontend Developer | MERN Stack Learner |
+                Karachi, Pakistan.</p>
         </footer>
     </div>
 </body>
+
 </html>

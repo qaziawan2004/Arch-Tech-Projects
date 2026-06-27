@@ -1,52 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Islamic Audio Player</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Audio Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="player">
+    <div class="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-headphones"></i>
+                <span>Audio<span>Pro</span></span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="active"><i class="fas fa-music"></i> Player</a>
+                <a href="playlist.html"><i class="fas fa-list"></i> Library</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                <button id="eqToggle"><i class="fas fa-sliders-h"></i></button>
+            </div>
+        </aside>
 
-    <img src="./Assets/Images/Logo1.png" alt="Logo" class="top-logo" id="topLogo">
+        <!-- Main Player -->
+        <main class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="track-info-header">
+                    <h2 id="title">Akhwarun Akhwarun</h2>
+                    <p id="artist">Islamic Nasheed</p>
+                </div>
+                <div class="top-actions">
+                    <button id="sleepBtn" title="Sleep Timer"><i class="fas fa-bed"></i></button>
+                    <button id="speedBtn" title="Speed">1.0x</button>
+                </div>
+            </div>
 
-    <div class="cover-box">
-        <img id="cover" src="./Assets/Images/podcast.jpg" class="cover">
+            <!-- Cover Art -->
+            <div class="cover-wrapper">
+                <div class="cover-container">
+                    <img id="cover" src="./Assets/Images/podcast.jpg" alt="Cover">
+                    <div class="cover-overlay" id="coverOverlay">
+                        <canvas id="visualizer"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="player-controls">
+                <div class="controls-row">
+                    <button id="shuffle" title="Shuffle"><i class="fas fa-random"></i></button>
+                    <button id="prev" title="Previous"><i class="fas fa-step-backward"></i></button>
+                    <button id="play" class="play-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                    <button id="next" title="Next"><i class="fas fa-step-forward"></i></button>
+                    <button id="repeat" title="Repeat"><i class="fas fa-redo"></i></button>
+                </div>
+
+                <!-- Progress -->
+                <div class="progress-section">
+                    <span id="current-time">0:00</span>
+                    <div class="progress-track" id="progressTrack">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <!-- Volume & Extras -->
+                <div class="volume-section">
+                    <button id="volumeBtn"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volume" min="0" max="100" value="70">
+                </div>
+            </div>
+
+            <!-- Equalizer (hidden by default) -->
+            <div class="equalizer-panel" id="equalizerPanel">
+                <div class="eq-presets">
+                    <button class="eq-preset active" data-preset="flat">Flat</button>
+                    <button class="eq-preset" data-preset="bass">Bass</button>
+                    <button class="eq-preset" data-preset="treble">Treble</button>
+                    <button class="eq-preset" data-preset="vocal">Vocal</button>
+                </div>
+                <div class="eq-bands" id="eqBands"></div>
+            </div>
+
+            <!-- Audio Element -->
+            <audio id="audio"></audio>
+
+        </main>
     </div>
 
-    <h2 id="title">Akhwarun Akhwarun</h2>
+    <!-- Toast Notification -->
+    <div id="toast" style="display:none; position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#1a221a; color:white; padding:12px 24px; border-radius:12px; border:1px solid #00c853; z-index:9999; font-family:sans-serif; box-shadow:0 8px 32px rgba(0,0,0,0.5);"></div>
 
-    <audio id="audio"></audio>
-
-    <div class="controls">
-        <button id="prev">⏮</button>
-        <button id="play">▶</button>
-        <button id="next">⏭</button>
-        <button id="repeat">🔁</button>
-    </div>
-
-    <div class="progress-container">
-        <div class="progress" id="progress"></div>
-    </div>
-
-    <div class="time">
-        <span id="current-time">0:00</span>
-        <span id="duration">0:00</span>
-    </div>
-
-    <div class="volume-container">
-        <span>🔊</span>
-        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
-    </div>
-
-    <button class="playlist-btn" onclick="location.href='playlist.html'">
-        Playlist
-    </button>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
